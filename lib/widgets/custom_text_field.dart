@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//this is reusable textfield for the update product page
 class CustomTextField extends StatelessWidget {
   const CustomTextField(
       {super.key,

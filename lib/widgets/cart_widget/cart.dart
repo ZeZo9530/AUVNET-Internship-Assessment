@@ -17,7 +17,9 @@ class _CartProductsState extends State<CartProducts> {
   Widget build(BuildContext context) {
     return BlocConsumer<CartCubit, CartState>(
       listener: (context, state) {
+        //handling the checkout state
         if (state is CartCheckout) {
+          //calling the orderHistory and clearing the cart
           BlocProvider.of<OrderHistoryCubit>(context).addOrder(state.cartList);
           print(state.cartList);
           ScaffoldMessenger.of(context).clearSnackBars();
@@ -26,6 +28,7 @@ class _CartProductsState extends State<CartProducts> {
         }
       },
       builder: (context, state) {
+        //handling the cartloaded state
         if (state is CartLoaded) {
           return ListView.builder(
               itemCount: state.cartProducts.length,

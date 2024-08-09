@@ -10,6 +10,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+//the 3 main screens of the app in the bottom nav bar
 class _HomeScreenState extends State<HomeScreen> {
   int screenIndex = 0;
   final List _screens = [

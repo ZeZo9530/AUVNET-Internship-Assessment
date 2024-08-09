@@ -4,6 +4,7 @@ import 'package:store_app/cubits/cart/cart_cubit.dart';
 import 'package:store_app/widgets/cart_widget/cart.dart';
 import 'package:store_app/widgets/custom_button.dart';
 
+//cart screen
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
   static const id = 'CartPage';

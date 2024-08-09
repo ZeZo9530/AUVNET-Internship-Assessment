@@ -1,5 +1,7 @@
 part of 'auth_cubit.dart';
 
+//i know i will go so much hate from this
+//but time wasn't by my side xd
 @immutable
 sealed class AuthState {}
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:store_app/models/product_model.dart';
 
+//this is custom widget for the order history
 class CustomOrderHistory extends StatelessWidget {
   const CustomOrderHistory({required this.products, super.key});
   final List<ProductModel> products;
@@ -17,6 +18,7 @@ class CustomOrderHistory extends StatelessWidget {
                 color:
                     Theme.of(context).colorScheme.secondary.withOpacity(0.8))),
         width: 500,
+        // making the height dynamic based on the number of products
         height: 120 * products.length.toDouble(),
         child: ListView.builder(
             itemCount: products.length,

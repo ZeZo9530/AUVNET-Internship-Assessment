@@ -13,6 +13,8 @@ class OrderHistory extends StatefulWidget {
 
 class _OrderHistoryState extends State<OrderHistory> {
   @override
+
+  //inializing the cubit of the order history when user enters the screen
   void initState() {
     super.initState();
     BlocProvider.of<OrderHistoryCubit>(context).getOrders();
@@ -23,6 +25,7 @@ class _OrderHistoryState extends State<OrderHistory> {
     List<List<ProductModel>> biglist = [];
     return BlocBuilder<OrderHistoryCubit, OrderHistoryState>(
       builder: (context, state) {
+        //handling the order history loaded state
         if (state is OrderHistoryLoaded) {
           biglist = state.historyList;
           return ListView.builder(

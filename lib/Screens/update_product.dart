@@ -4,6 +4,7 @@ import 'package:store_app/services/API/update_product.dart';
 import 'package:store_app/widgets/custom_button.dart';
 import 'package:store_app/widgets/custom_text_field.dart';
 
+//updating the product and uploading the data to the api
 class UpdateProduct extends StatefulWidget {
   const UpdateProduct({
     super.key,

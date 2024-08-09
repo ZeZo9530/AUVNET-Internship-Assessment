@@ -5,6 +5,7 @@ import 'package:store_app/cubits/cart/cart_cubit.dart';
 import 'package:store_app/models/product_model.dart';
 import 'package:store_app/widgets/custom_button.dart';
 
+//just ui for displaying the details of the product
 class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key});
   static const String id = 'product_details';

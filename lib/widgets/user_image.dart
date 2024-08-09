@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+//handling user input image in the
+//singup screen using image picker
 class UserImagePicker extends StatefulWidget {
   const UserImagePicker({super.key, required this.onPicked});
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:store_app/Screens/product_details.dart';
 import 'package:store_app/models/product_model.dart';
 
+//this is the ui for the products in the home screen
 class CustomCard extends StatelessWidget {
   const CustomCard({required this.product, super.key});
 
@@ -9,6 +10,7 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      //enable user to see details of the product
       onTap: () {
         Navigator.pushNamed(context, ProductDetails.id, arguments: product);
       },
@@ -59,6 +61,7 @@ class CustomCard extends StatelessWidget {
               ),
             ),
           ),
+          //displaying the flying product image
           Positioned(
             bottom: 65,
             left: 40,

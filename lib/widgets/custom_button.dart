@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//this is a custom button for reusing through out the screens
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key, this.onTap, required this.text});
   final VoidCallback? onTap;

@@ -13,11 +13,14 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
   bool isLogin = true;
   Box userBox = Hive.box('LoginData');
+
+  //toggle login and signup
   void toggleAuthMode() {
     isLogin = !isLogin;
     emit(AuthToggle(isLogin: isLogin));
   }
 
+  //login function
   Future<void> login(
       {required String enteredEmail, required String enteredPassword}) async {
     emit(AuthLoading());
@@ -35,6 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  //signup function
   Future<void> signup(
       {required String enteredEmail,
       required String enteredPassword,
@@ -45,6 +49,8 @@ class AuthCubit extends Cubit<AuthState> {
       final userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: enteredEmail, password: enteredPassword);
+
+      //storing user image
       final storageRef = FirebaseStorage.instance
           .ref()
           .child("user_image")
@@ -52,6 +58,7 @@ class AuthCubit extends Cubit<AuthState> {
       await storageRef.putFile(selectedImage!);
       final imageUrl = await storageRef.getDownloadURL();
 
+      //storing user data
       await FirebaseFirestore.instance
           .collection("users")
           .doc(userCredential.user!.uid)
@@ -61,6 +68,7 @@ class AuthCubit extends Cubit<AuthState> {
         'imageUrl': imageUrl
       });
       emit(SignupSuccess());
+      //handling error
     } on FirebaseAuthException catch (error) {
       emit(AuthFailed(error: error.message ?? 'Authentication failed'));
     }

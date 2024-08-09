@@ -12,10 +12,12 @@ class CartCubit extends Cubit<CartState> {
 
   List<List<ProductModel>> cartList = [];
 
+//adding products to cart list
   void addProduct(ProductModel product) {
     cartItems.add(product);
   }
 
+  //removing products from cart
   void removeProduct(ProductModel product) {
     cartItems.remove(product);
     if (cartItems.isEmpty) {
@@ -25,6 +27,7 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
+  //return cartloaded state if the list is not empty
   void getCart() {
     if (cartItems.isEmpty) {
       emit(CartEmpty());
@@ -33,11 +36,13 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
+  //clearing cart
   void clearCart() {
     emit(CartEmpty());
     cartItems.clear();
   }
 
+  //checkout to save the items in the order history and clear cart
   void checkOut() {
     if (cartItems.isEmpty) {
       emit(CartEmpty());

@@ -25,9 +25,11 @@ class _AuthScreenState extends State<AuthCard> {
   @override
   void initState() {
     super.initState();
+    //calling the method for checking if the user logged in before
     _isLoggedin();
   }
 
+  //function for checking if the hive is empty or not to log in the user
   void _isLoggedin() {
     if (userBox.get('email') != null) {
       String email = userBox.get('email');
@@ -53,6 +55,8 @@ class _AuthScreenState extends State<AuthCard> {
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
             ),
+            //listening to the AuthToggle function
+            //which returns if the user is in login or signup mode
             BlocListener<AuthCubit, AuthState>(
               listener: (context, state) {
                 if (state is AuthToggle) {
@@ -60,11 +64,14 @@ class _AuthScreenState extends State<AuthCard> {
                     _isLogin = state.isLogin;
                   });
                 }
+                //means user has submitted data and waiting for verification
+                //and puts the app on a waiting state
                 if (state is AuthLoading) {
                   setState(() {
                     _isAuth = true;
                   });
                 }
+                //state for handling failed login or signup
                 if (state is AuthFailed) {
                   ScaffoldMessenger.of(context).clearSnackBars();
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -74,6 +81,7 @@ class _AuthScreenState extends State<AuthCard> {
                     _isAuth = false;
                   });
                 }
+                //state for successful login or signup
                 if (state is LoginSuccess || state is SignupSuccess) {
                   Navigator.of(context).pushReplacementNamed('homeScreen');
                 }
@@ -88,6 +96,7 @@ class _AuthScreenState extends State<AuthCard> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
+                            //displaying more or less info based on login or signup
                             if (!_isLogin)
                               UserImagePicker(
                                 onPicked: (pickedImage) {
@@ -106,6 +115,7 @@ class _AuthScreenState extends State<AuthCard> {
                                   _enteredUsername = value!;
                                 },
                               ),
+                            //handling user email
                             TextFormField(
                               decoration: const InputDecoration(
                                   labelText: "Email Address"),
@@ -124,6 +134,7 @@ class _AuthScreenState extends State<AuthCard> {
                                 _enteredEmail = value!;
                               },
                             ),
+                            //handling user password
                             TextFormField(
                               decoration:
                                   const InputDecoration(labelText: 'Password'),
@@ -149,6 +160,8 @@ class _AuthScreenState extends State<AuthCard> {
                                         .colorScheme
                                         .primaryContainer),
                                 onPressed: () {
+                                  //not best practice but handling the validation
+                                  //in both login and singup mode
                                   final isValid =
                                       _formKey.currentState!.validate();
 
@@ -157,6 +170,7 @@ class _AuthScreenState extends State<AuthCard> {
                                       return;
                                     }
                                     _formKey.currentState!.save();
+                                    //calling the signup state
                                     BlocProvider.of<AuthCubit>(context).signup(
                                         enteredEmail: _enteredEmail,
                                         enteredPassword: _enteredPassword,
@@ -167,7 +181,7 @@ class _AuthScreenState extends State<AuthCard> {
                                       return;
                                     }
                                     _formKey.currentState!.save();
-
+                                    //calling the login state
                                     BlocProvider.of<AuthCubit>(context).login(
                                         enteredEmail: _enteredEmail,
                                         enteredPassword: _enteredPassword);
@@ -181,6 +195,7 @@ class _AuthScreenState extends State<AuthCard> {
                             if (!_isAuth)
                               TextButton(
                                 onPressed: () {
+                                  //toggle between singup and login
                                   BlocProvider.of<AuthCubit>(context)
                                       .toggleAuthMode();
                                 },
